@@ -1,6 +1,6 @@
 GenericIssueField.seed(:id, [
   { :id => 1,  :project_id => 2, :title => 'severity', :description => 'how bad is it?',
-         :default_value => 3, :mandatory => true },
+         :default_value => 3, :mandatory => false },
   { :id => 2,  :project_id => 2, :title => 'component', :description => 'pick the component',
          :default_value => 7, :mandatory => false }
 ])
@@ -16,9 +16,9 @@ GenericIssueFieldValue.seed(:id, [
  { :id => 8, :generic_issue_field_id => 2, :title => 'geometry', :description => '' }
 ])
 
-IssueGenericIssueFieldValue.seed(:generic_issue_field_value_id, [
- { :issue_id => 1, :generic_issue_field_value_id => 2 },
- { :issue_id => 1, :generic_issue_field_value_id => 6 },
- { :issue_id => 2, :generic_issue_field_value_id => 1 },
- { :issue_id => 2, :generic_issue_field_value_id => 8 }
-])
+(1..300).each do |i|
+  IssueGenericIssueFieldValue.seed(:generic_issue_field_value_id, [
+   { :issue_id => i, :generic_issue_field_value_id => [1,2,3,4,5].sample },
+   { :issue_id => i, :generic_issue_field_value_id => [6,7,8].sample }
+  ])
+end
